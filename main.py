@@ -128,8 +128,6 @@ def view_grades(name):
     print("Student not found.")                  
 
 
-
-
 def menu():
     while True:
         print("1. Add student")
@@ -186,7 +184,7 @@ def menu():
                 view_grades(name)
             else:
                 print("Invalid choice. Please try again.")
-                
+
         elif choice == "6":
             save_to_json()
             print("Exiting...")
