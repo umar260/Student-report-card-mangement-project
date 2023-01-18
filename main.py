@@ -3,121 +3,121 @@ import json
 import os
 
 class Student:
-    def __init__(self, name, class_, dob, fees):
+    def __init__(self, name, classofs, dob, fees):
         self.name = name
-        self.class_ = class_
+        self.class_ = classofs
         self.dob = dob
         self.fees = fees
         self.grades = {}
 
 
 
-students_list = []
+studentslist = []
 
-def load_from_json():
+def loadfromjson():
     try:
         with open("students.json", "r") as f:
             data = json.load(f)
             for student_data in data:
-                student = Student(student_data['name'], student_data['class_'], 
+                student = Student(student_data['name'], student_data['classofs'], 
                                   student_data['dob'], student_data['fees'])
                 student.grades = student_data['grades']
-                students_list.append(student)
+                studentslist.append(student)
     except Exception as e:
-        print("Error in loading json file: ",e)
+        print("Getting Error in loading json file: ",e)
 
-load_from_json()        
+loadfromjson()        
 
-def save_to_json():
+def savetojson():
     try:
         with open("students.json", "w") as f:
-            json.dump([student.__dict__ for student in students_list], f)
+            json.dump([student.__dict__ for student in studentslist], f)
     except Exception as e:
-        print("Error in saving json file: ",e)
+        print("Getting Error in saving the json file: ",e)
 
                 
 
-def add_student(name, class_, dob, fees):
-    student = Student(name, class_, dob, fees)
-    students_list.append(student)
+def addstudents(name, classofs, dob, fees):
+    student = Student(name, classofs, dob, fees)
+    studentslist.append(student)
 
 
-def remove_student(name):
-    for i, student in enumerate(students_list):
+def removestudents(name):
+    for i, student in enumerate(studentslist):
         if student.name == name:
-            del students_list[i]
-            print("Student removed successfully!")
+            del studentslist[i]
+            print("Student is removed successfully!")
             return
     print("Student not found.")
 
-def edit_student(name, new_name=None, new_class=None, new_dob=None, new_fees=None):
-    for student in students_list:
+def editstudents(name, newname=None, newclass=None, newdob=None, newfees=None):
+    for student in studentslist:
         if student.name == name:
-            if new_name:
-                student.name = new_name
-            if new_class:
-                student.class_ = new_class
-            if new_dob:
-                student.dob = new_dob
-            if new_fees:
-                student.fees = new_fees
-            print("Student details updated successfully!")
+            if newname:
+                student.name = newname
+            if newclass:
+                student.classofs = newclass
+            if newdob:
+                student.dob = newdob
+            if newfees:
+                student.fees = newfees
+            print("Student details are updated successfully!")
             return
     print("Student not found.")
 
-def view_students():
-    if not students_list:
+def viewstudents():
+    if not studentslist:
         print("No students found.")
         return
-    for student in students_list:
+    for student in studentslist:
         print("Name:", student.name)
-        print("Class:", student.class_)
+        print("Class:", student.classofs)
         print("Date of Birth:", student.dob)
         print("Fees:", student.fees)
-        print("-----------------------------")    
+        print("-------------")    
 
-def is_valid_name(name):
+def isvalidname(name):
     if re.match("^[a-zA-Z\s]*$", name):
         return True
     return False
 
-def is_valid_class(class_):
-    if re.match("^[0-9a-zA-Z\s]*$", class_):
+def isvalidclass(classofs):
+    if re.match("^[0-9a-zA-Z\s]*$", classofs):
         return True
     return False
 
-def is_valid_dob(dob):
+def isvaliddob(dob):
     if re.match("^[0-9]{2}/[0-9]{2}/[0-9]{4}$", dob):
         return True
     return False
 
-def is_valid_fees(fees):
+def isvalidfees(fees):
     if re.match("^[0-9]*$", fees):
         return True
     return False  
 
-def add_grades(name, subject, grade):
-    for student in students_list:
+def addgrades(name, subject, grade):
+    for student in studentslist:
         if student.name == name:
             student.grades[subject] = grade
-            print("Grades added successfully!")
+            print("Grades are added successfully!")
             return
-    print("Student not found.")
+    print("Could not found the student.")
 
-def edit_grades(name, subject, new_grade):
-    for student in students_list:
+def editgrades(name, subject, new_grade):
+    for student in studentslist:
         if student.name == name:
             if subject in student.grades:
                 student.grades[subject] = new_grade
-                print("Grades updated successfully!")
+                print("Grades are updated successfully!")
                 return
             else:
                 print(f"Subject {subject} not found for student {name}")
                 return
-    print("Student not found.")
+    print("Could not found the student.")
 
-def view_grades(name):
-    for student in students_list:
+def viewgrades(name):
+    for student in studentslist:
         if student.name == name:
             if student.grades:
                 for subject, grade in student.grades.items():
@@ -125,71 +125,71 @@ def view_grades(name):
             else:
                 print(f"No grades found for student {name}")
             return
-    print("Student not found.")                  
+    print("Could not found the student.")                  
 
 
 def menu():
     while True:
-        print("1. Add student")
-        print("2. Remove student")
+        print("1. Add a student")
+        print("2. Remove a student")
         print("3. Edit student details")
-        print("4. View students")
-        print("5. Add/Edit/View grades")
-        print("6. Exit")
-        choice = input("Enter your choice: ")
+        print("4. View a students")
+        print("5. Add/Edit/View grades od the student")
+        print("6. To Exit")
+        selection = input("Enter your choice: ")
 
-        if choice == "1":
-            name = input("Enter student name: ")
-            class_ = input("Enter class: ")
-            dob = input("Enter date of birth (dd/mm/yyyy): ")
-            fees = input("Enter fees: ")
-            add_student(name, class_, dob, fees)
-            print("Student added successfully!")
+        if selection == "1":
+            name = input("Enter the student name: ")
+            classofs = input("Enter the class: ")
+            dob = input("Enter the date of birth of the student(dd/mm/yyyy): ")
+            fees = input("Enter the fees: ")
+            addstudents(name, classofs, dob, fees)
+            print("Student is added successfully!")
 
-        elif choice == "2":
-            name = input("Enter student name: ")
-            remove_student(name)
+        elif selection == "2":
+            name = input("Enter a student name: ")
+            removestudents(name)
 
-        elif choice == "3":
-            name = input("Enter student name: ")
-            new_name = input("Enter new name (Press Enter to skip): ")
-            new_class = input("Enter new class (Press Enter to skip): ")
-            new_dob = input("Enter new date of birth (Press Enter to skip): ")
-            new_fees = input("Enter new fees (Press Enter to skip): ")
-            edit_student(name, new_name, new_class, new_dob, new_fees)
+        elif selection == "3":
+            name = input("Enter a student name: ")
+            new_name = input("Enter a new name (Please Press Enter to skip): ")
+            new_class = input("Enter a new class (Please Press Enter to skip): ")
+            new_dob = input("Enter new date of birth of the student (PLease Press Enter to skip): ")
+            new_fees = input("Enter the new fees (PLease Press Enter to skip): ")
+            editstudents(name, new_name, new_class, new_dob, new_fees)
 
-        elif choice == "4":
-            view_students()
+        elif selection == "4":
+            viewstudents()
 
-        elif choice == "5":
-            print("1. Add grades")
-            print("2. Edit grades")
-            print("3. View grades")
-            grade_choice = input("Enter your choice: ")
+        elif selection == "5":
+            print("1. To Add grades")
+            print("2. To Edit grades")
+            print("3. To View grades")
+            gradechoice = input("Enter your choice: ")
 
-            if grade_choice == "1":
-                name = input("Enter student name: ")
-                subject = input("Enter subject: ")
-                grade = input("Enter grade: ")
-                add_grades(name, subject, grade)
+            if gradechoice == "1":
+                name = input("Enter the student name: ")
+                subject = input("Enter the  subject: ")
+                grade = input("Enter the grade: ")
+                addgrades(name, subject, grade)
 
-            elif grade_choice == "2":
-                name = input("Enter student name: ")
-                subject = input("Enter subject: ")
-                new_grade = input("Enter new grade: ")
-                edit_grades(name, subject, new_grade)
+            elif gradechoice == "2":
+                name = input("Enter the student name: ")
+                subject = input("Enter the subject: ")
+                new_grade = input("Enter the new grade: ")
+                editgrades(name, subject, new_grade)
 
-            elif grade_choice == "3":
-                name = input("Enter student name: ")
-                view_grades(name)
+            elif gradechoice == "3":
+                name = input("Enter a student name: ")
+                viewgrades(name)
             else:
-                print("Invalid choice. Please try again.")
+                print("Invalid choice. Can u Please try again.")
 
-        elif choice == "6":
-            save_to_json()
+        elif selection == "6":
+            savetojson()
             print("Exiting...")
-            break
+            break 
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice. Can u Please try again.")
 
 menu()
