@@ -1,1 +1,1 @@
-[{"name": "Ali", "class_": "1", "dob": "07/09/2019", "fees": "300", "grades": {}}, {"name": "ali", "class_": "6", "dob": "07/09/2005", "fees": "1000", "grades": {}}, {"name": "ttt", "class_": "4", "dob": "19/5/2006", "fees": "1000", "grades": {}}]
+[{"name": "Ali", "grade": "1", "dateofbirth": "1/4/2000", "fees": "1000", "grades": {}}]
