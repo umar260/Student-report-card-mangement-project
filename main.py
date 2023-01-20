@@ -56,6 +56,12 @@ def editstudentdetails(name, newname=None, newclass=None, dateofbirth=None, fees
         if student.name == name:
             if newname:
                 student.name = newname
+            if newclass:
+                student.grade = newclass
+            if dateofbirth:
+                student.dateofbirth = dateofbirth
+            if fees:
+                student.fees = fees
 
 # view every student data
 def viewstduents():
